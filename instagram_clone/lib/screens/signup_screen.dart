@@ -3,22 +3,26 @@ import 'package:flutter_svg/svg.dart';
 import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/widgets/text_field_input.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _bioController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
 
   @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+    _bioController.dispose();
+    _usernameController.dispose();
   }
 
   @override
@@ -43,6 +47,35 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 64,
             ),
+            Stack(
+              children: [
+                const CircleAvatar(
+                  radius: 64,
+                  backgroundImage: NetworkImage(
+                      'https://images.unsplash.com/photo-1675685828125-1f6bee17eefa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'),
+                ),
+                Positioned(
+                  bottom: -10,
+                  left: 80,
+                  child: IconButton(
+                    onPressed: () {
+                      //TODO: on tap
+                    },
+                    icon: const Icon(Icons.add_a_photo),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 64,
+            ),
+            TextFieldInput(
+                textEditingController: _usernameController,
+                hintText: 'Enter your username',
+                textInputType: TextInputType.text),
+            const SizedBox(
+              height: 24,
+            ),
             TextFieldInput(
                 textEditingController: _emailController,
                 hintText: 'Enter your email',
@@ -59,11 +92,18 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 24,
             ),
+            TextFieldInput(
+                textEditingController: _bioController,
+                hintText: 'Enter your bio',
+                textInputType: TextInputType.text),
+            const SizedBox(
+              height: 24,
+            ),
             SizedBox(
               width: double.infinity,
               child: TextButton(
                 onPressed: () {
-//TODO: on tap
+                  //TODO: on tap
                 },
                 style: ButtonStyle(
                   alignment: Alignment.center,
@@ -92,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: const Text("Don't have an account?"),
                 ),
                 GestureDetector(
-                  onTap:() {
+                  onTap: () {
                     //TODO: on tap
                   },
                   child: Container(

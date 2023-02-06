@@ -7,6 +7,7 @@ import 'utils/colors.dart';
 import 'responsive/responsive_layout_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'screens/signup_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,7 +45,7 @@ class InstagramClone extends StatelessWidget {
           //Se puede agregar el const porque no se van a pasar valores dinamicos a el constructor
           webScreenLayout: WebScreenLayout(),
           mobileScreenLayout: MobileScreenLayout()), */
-        home: LoginScreen(),
+        home: SignupScreen(),
     );
   }
 }
