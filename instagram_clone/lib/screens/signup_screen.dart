@@ -39,6 +39,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void selectImage() async {
     Uint8List im = await pickImage(ImageSource.gallery);
+    if (!mounted) return;
     setState(() {
       _image = im;
     });
@@ -55,7 +56,7 @@ class _SignupScreenState extends State<SignupScreen> {
         bio: _bioController.text,
         file: _image!);
     print(res);
-
+    if (!mounted) return;
     setState(() {
       _isLoading = false;
     });
@@ -66,10 +67,10 @@ class _SignupScreenState extends State<SignupScreen> {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (context) => const ResponsiveLayout(
-                //Se puede agregar el const porque no se van a pasar valores dinamicos a el constructor
-                webScreenLayout: WebScreenLayout(),
-                mobileScreenLayout: MobileScreenLayout(),
-              ),
+            //Se puede agregar el const porque no se van a pasar valores dinamicos a el constructor
+            webScreenLayout: WebScreenLayout(),
+            mobileScreenLayout: MobileScreenLayout(),
+          ),
         ),
       );
     }

@@ -33,6 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _isLoading = true;
     });
+
     String res = await AuthMethods().loginUser(
         email: _emailController.text, password: _passwordController.text);
 
@@ -46,8 +47,16 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       );
+
+/*       setState(() {
+        _isLoading = false;
+      }); */
     } else {
       showSnackBar(res, context);
+
+/*       setState(() {
+        _isLoading = false;
+      }); */
     }
     setState(() {
       _isLoading = false;

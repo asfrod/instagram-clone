@@ -24,6 +24,7 @@ class _WebScreenLayoutState extends State<WebScreenLayout> {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
 
+    if (!mounted) return;
     setState(() {
       username = (snap.data()! as Map<String, dynamic>)['username'];
     });
