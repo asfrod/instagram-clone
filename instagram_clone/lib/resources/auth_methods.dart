@@ -23,9 +23,10 @@ class AuthMethods {
     required String password,
     required String username,
     required String bio,
-    required Uint8List file,
+    required Uint8List? file,
   }) async {
     String res = 'Some error ocurred';
+    String photoUrl = '';
     try {
       if (email.isNotEmpty ||
           password.isNotEmpty ||
@@ -36,9 +37,12 @@ class AuthMethods {
         UserCredential cred = await _auth.createUserWithEmailAndPassword(
             email: email, password: password);
 
-        String photoUrl = await StorageMethods()
+        if (file != null) {
+          photoUrl = await StorageMethods()
             .uploadImageToStorage('profilePics', file, false);
-
+        } else {
+          photoUrl = 'https://i.stack.imgur.com/l60Hf.png';
+        }
         //add user to our database
 
         model.User user = model.User(

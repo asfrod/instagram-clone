@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../utils/global_variables.dart';
+
 class ResponsiveLayout extends StatefulWidget {
   final Widget webScreenLayout;
   final Widget mobileScreenLayout;
@@ -29,8 +31,7 @@ class _ResponsiveLayoutState extends State<ResponsiveLayout> {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constrains) {
-      if (constrains.maxWidth > 600) {
-        //TODO: 600 valor original 1-constante para otro documento
+      if (constrains.maxWidth > webScreenSize) {
         return widget.webScreenLayout;
       } else {
         return widget.mobileScreenLayout;
