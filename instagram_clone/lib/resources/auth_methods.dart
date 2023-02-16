@@ -18,7 +18,7 @@ class AuthMethods {
     return model.User.fromSnap(snap);
   }
 
-  Future<String> signupUser({
+  Future<String> signUpUser({
     required String email,
     required String password,
     required String username,
@@ -39,13 +39,13 @@ class AuthMethods {
 
         if (file != null) {
           photoUrl = await StorageMethods()
-            .uploadImageToStorage('profilePics', file, false);
+              .uploadImageToStorage('profilePics', file, false);
         } else {
           photoUrl = 'https://i.stack.imgur.com/l60Hf.png';
         }
         //add user to our database
 
-        model.User user = model.User(
+        model.User _user = model.User(
             email: email,
             uid: cred.user!.uid,
             photoUrl: photoUrl,
@@ -54,10 +54,9 @@ class AuthMethods {
             followers: [],
             following: []);
 
-        await _firestore
-            .collection('users')
-            .doc(cred.user!.uid)
-            .set(user.toJson());
+        await _firestore.collection('users').doc(cred.user!.uid).set(
+              _user.toJson(),
+            );
 
         res = 'success';
       }
