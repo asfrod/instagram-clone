@@ -1,5 +1,8 @@
 import 'dart:typed_data';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/providers/user_provider.dart';
@@ -8,7 +11,7 @@ import 'package:instagram_clone/utils/colors.dart';
 import 'package:instagram_clone/utils/utils.dart';
 import 'package:provider/provider.dart';
 
-import '../models/user.dart';
+import '../models/user.dart' as model;
 import '../resources/auth_methods.dart';
 
 class AddPostScreen extends StatefulWidget {
@@ -98,7 +101,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final User? user = Provider.of<UserProvider>(context).getUser;
+    model.User? user = Provider.of<UserProvider>(context).getUser;
 
     return user == null
         ? const Center(
@@ -125,9 +128,9 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   actions: [
                     TextButton(
                       onPressed: () => postImage(
-                        user.uid,
-                        user.username,
-                        user.photoUrl,
+                        user.uid!,
+                        user.username!,
+                        user.photoUrl!,
                       ),
                       child: const Text(
                         'Post',
@@ -147,7 +150,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CircleAvatar(
-                          backgroundImage: NetworkImage(user.photoUrl),
+                          backgroundImage: NetworkImage(user.photoUrl!),
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width * 0.4,
